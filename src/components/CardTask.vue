@@ -1,19 +1,17 @@
 <template>
-<div class="task_list">
-    <div class="task" v-bind:class="{hide:task.completed}" >
+<div class="task" v-bind:class="{hide:task.completed}" >
+    <div class="task_block">
         <p class="task__title">Title:{{task.title}}</p>
         <p class="task__desc">Description:{{task.desc}}</p>
-        <button v-on:click="doneTask">delete</button>
-        <button class="delete"
-         v-on:click="removeTask(index)">xtr</button>
     </div>
-    
+    <button class="done-task" v-on:click="doneTask" v-bind:class="{done_hide:task.completed}">done</button>
+    <button class="delete"
+        v-on:click="removeTask(index)"></button>
 </div>
 </template>
 
 
 <script>
-
 export default {
     name:"CardTask",
     props: {
@@ -33,16 +31,15 @@ export default {
 </script>
 
 
-
 <style>
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .task{
     display: flex;
     flex-direction: row;
     font-family: 'Montserrat', sans-serif;
     padding-left: 2vw;
     font-size: 1.4vw;
-    width: 50%;
+    width: 90%;
     height: 10%;
     display: flex;
     text-align: center;
@@ -50,14 +47,36 @@ export default {
     border: 0;
     border-radius: 15px;
     background-color: white;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 
+}
+.done-task.done_hide{ 
+    background-color: green;
+}
+.done-task{
+    margin-left: 3%;
+    font-size: 1.4vw;
+    color: black;
+    background-color: rgba(204, 203, 203, 0.965);
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 8vw;
+    height: 2.8vw;
+    border: 1px solid #000;
+    border-radius: 100px;
 }
 .task_list{
     margin-top:5px;
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.task_block{
+    text-align: left;
 }
 .delete{
      display: flex;
@@ -71,7 +90,7 @@ export default {
     font-family: "PT Sans Narrow";
     display: flex;
     margin-left: auto;
-    margin-right: 0px;
+    margin-right: 10px;
     height: 2.6vw;
     width: 2.6vw;
     border-radius: 50%;
@@ -80,6 +99,6 @@ export default {
     align-items: center;
 }
 .hide{
-    text-decoration: line-through;
+    background-color: rgb(180, 177, 177);;
 }
 </style>

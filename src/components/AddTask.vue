@@ -1,10 +1,11 @@
 <template>
     <div class="new-task">
-        <input id="title" type="text" v-on:keyup.enter="addTask" placeholder="title">
-        <input id="desc" type="text" v-on:keyup.enter="addTask" placeholder="desc">
-        <button class="btn-add" v-on:click="addTask">add</button>
+        <input id="title" type="text" v-on:keyup.enter="addTask" placeholder="Title">
+        <input id="desc" type="text" v-on:keyup.enter="addTask" placeholder="Description">
+        <button class="btn-add" v-on:click="addTask">Add</button>
     </div>
 </template>
+
 
 <script>
 export default{
@@ -13,26 +14,41 @@ export default{
         addTask(){
             let inputTitle=document.querySelector('#title')
             let inputDesc=document.querySelector('#desc')
-            
-            this.$emit('add-task',{
-                title:inputTitle.value,
-                desc:inputDesc.value,
-                completed:false,
-
-                    })
-            inputTitle.value='',
-            inputDesc.value=''
+            if ((inputTitle.value=='')){
+                inputTitle.classList.add('red')
             }
+            else if (inputDesc.value==''){
+            inputDesc.classList.add('red')
+            } 
+            else {
+                inputTitle.classList.remove('red')
+                inputDesc.classList.remove('red')
+            
+                this.$emit('add-task',{
+                    title:inputTitle.value,
+                    desc:inputDesc.value,
+                    completed:false,
+                    date: new Date(),
+                })
+                inputTitle.value='',
+                inputDesc.value=''
+            }
+        }
+    },
+}
 
-        },
-
-    }
 </script>
+
+
 <style>
+.red{
+    border: 3px solid red;
+}
 .new-task{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 input{
     font-size: 1.6vw;
@@ -60,7 +76,7 @@ input:nth-child(2){
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-    width: 10%;
+    width: 10vw;
     height: 2.8vw;
     border: 0;
     border-radius: 100px;
